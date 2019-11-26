@@ -4,6 +4,203 @@ export default (editor, config = {}) => {
   let blocks = c.blocks;
   let cats = c.blockCategories;
 
+  // BASIC
+
+  if (cats.basic) {
+
+    if (blocks.link) {
+      bm.add('link', {
+        label: c.labels.link,
+        category: 'Basic',
+        attributes: {class:'fa fa-link'},
+        content: {
+          type: 'link',
+          content: 'Link text'
+        }
+      });
+    }
+
+    if (blocks.image) {
+      // example of how we might include encoded image as default src. i like the idea but it mucks up the settings src field
+      //let default_src = 'data:image/png;base64,iVB\ORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEU\AAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8\yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAEl\FTkSuQmCC'
+      bm.add('image', {
+        label: c.labels.image,
+        category: 'Basic',
+        attributes: {class:'fa fa-picture-o'},
+        content: {
+          type: 'image'
+        }
+      });
+    }
+
+    if (blocks.video) {
+      // example of how we might include encoded image as default src. i like the idea but it mucks up the settings src field
+      //let default_src = 'data:image/png;base64,iVB\ORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEU\AAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8\yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAEl\FTkSuQmCC'
+      bm.add('vdieo', {
+        label: c.labels.video,
+        category: 'Basic',
+        attributes: {class:'fa fa-youtube-play'},
+        content: {
+          type: 'video',
+          src: 'img/video2.webm',
+          style: {
+            height: '350px',
+            width: '615px',
+          }
+        }
+      });
+    }
+
+    bm.add('link-block', {
+      label: 'link-block',
+      category: 'Basic',
+      attribtues: {class: 'fa fa-square-o'},
+      // content: '<div><a href="" style="min-height: 50px; min-width: 50px;">Link Block</a></div>',
+      content: {
+        type: 'default',
+        components: {
+          type: 'link',
+          style: {
+            display: 'block',
+          },
+          components: {
+            type: 'image',
+          },
+        },
+      },
+    });
+
+    bm.add('list', {
+      label: 'Bullet List',
+      category: 'Basic',
+      attributes: {class:'fa fa-list'},
+      content: {
+        type: 'list',
+        components: [{
+          type: 'list-item',
+        },{
+          type: 'list-item'
+        },{
+          type:'list-item'
+        },
+      ],
+      }
+    });
+   
+    bm.add('incon-list', {
+      label: 'Icon List',
+      category: 'Basic',
+      attributes: {class:'fa fa-list'},
+      content: {
+        type: 'list',
+        classes: ['icon-list'],
+        components: [
+          {
+            type: 'list-item',
+          },{
+            type: 'list-item'
+          },{
+            type:'list-item'
+          },
+        ],
+      },
+      // `<ul class="icon-list"><li>icon list item</li><li>icon list item</li><li>icon list item</li></ul>`,
+    });
+
+    bm.add('flush-list', {
+      label: 'Flush List',
+      category: 'Basic',
+      attributes: {class:'fa fa-list'},
+      content: {
+        type: 'list',
+        classes:['list-group', 'list-group-flush'],
+        components: [
+          {
+            type: 'list-item',
+            classes:["list-group-item"],
+          },{
+            type: 'list-item',
+            classes:["list-group-item"],
+          },{
+            type:'list-item',
+            classes:["list-group-item"],
+          },
+        ],
+      },
+    });
+
+    bm.add('media-list', {
+      label: 'Media Object List',
+      category: 'Basic',
+      attributes: {class:'fa fa-list'},
+      content: {
+        type: 'list',
+        classes:['list-unstyled',],
+        components: [
+          {
+            type: 'mendia-list-item',
+          },{
+            type: 'media-list-item',
+          },{
+            type:'media-list-item',
+          },
+        ],
+      },
+    });
+
+    bm.add('card-list', {
+      label: 'Cards that will collapse',
+      category: 'Basic',
+      attributes: {class:'fa fa-list'},
+      content: {
+        type: 'card-list-item',
+      },
+    });
+
+  }
+
+  // TYPOGRAPHY
+
+  if (cats.typography) {
+
+    if (blocks.text) {
+      bm.add('text', {
+        label: c.labels.text,
+        category: 'Typography',
+        attributes: {class:'fa fa-font'},
+        content: {
+          type:'text',
+          content: 'Insert your text here'
+        }
+      });
+    }
+
+    if (blocks.header) {
+      bm.add('header', {
+        label: c.labels.header,
+        category: 'Typography',
+        attributes: {class:'fa fa-header'},
+        content: {
+          type: 'header',
+          content: 'Bootstrap heading'
+        }
+      });
+    }
+
+    if (blocks.paragraph) {
+      bm.add('paragraph', {
+        label: c.labels.paragraph,
+        category: 'Typography',
+        attributes: {class:'fa fa-paragraph'},
+        content: {
+          type: 'paragraph',
+          content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.'
+        }
+      });
+    }
+
+  }
+
   // LAYOUT
 
   if (cats.layout) {
@@ -77,6 +274,21 @@ export default (editor, config = {}) => {
                  </div>`
       });
     }
+
+    bm.add('twelve-nine-three layout', {
+      label: '12 | 9/3',
+      category: 'Layout',
+      attribtues: {class:'fa fa-columns'},
+      content: `<div class="container">
+                  <div class="row">
+                    <div class="col-12"><h1>TOP</h1></div>
+                  </div>
+                  <div class="row pt-4 pb-3">
+                    <div class="col-9">Left 9 cols</div>
+                    <div class="col-3">Right 3 Cols</div>
+                  </div>
+                </div>`,
+    });
 
   }
 
@@ -212,90 +424,6 @@ export default (editor, config = {}) => {
         }
       });*/
     }
-
-  }
-
-  // TYPOGRAPHY
-
-  if (cats.typography) {
-
-    if (blocks.text) {
-      bm.add('text', {
-        label: c.labels.text,
-        category: 'Typography',
-        attributes: {class:'fa fa-font'},
-        content: {
-          type:'text',
-          content: 'Insert your text here'
-        }
-      });
-    }
-
-    if (blocks.header) {
-      bm.add('header', {
-        label: c.labels.header,
-        category: 'Typography',
-        attributes: {class:'fa fa-header'},
-        content: {
-          type: 'header',
-          content: 'Bootstrap heading'
-        }
-      });
-    }
-
-    if (blocks.paragraph) {
-      bm.add('paragraph', {
-        label: c.labels.paragraph,
-        category: 'Typography',
-        attributes: {class:'fa fa-paragraph'},
-        content: {
-          type: 'paragraph',
-          content: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.'
-        }
-      });
-    }
-
-  }
-
-  // BASIC
-
-  if (cats.basic) {
-
-    if (blocks.link) {
-      bm.add('link', {
-        label: c.labels.link,
-        category: 'Basic',
-        attributes: {class:'fa fa-link'},
-        content: {
-          type: 'link',
-          content: 'Link text'
-        }
-      });
-    }
-
-    if (blocks.image) {
-      // example of how we might include encoded image as default src. i like the idea but it mucks up the settings src field
-      //let default_src = 'data:image/png;base64,iVB\ORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEU\AAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8\yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAEl\FTkSuQmCC'
-      bm.add('image', {
-        label: c.labels.image,
-        category: 'Basic',
-        attributes: {class:'fa fa-picture-o'},
-        content: {
-          type: 'image'
-        }
-      });
-    }
-
-    /*if (blocks.list) {
-      bm.add('list', {
-        label: c.labels.list,
-        category: 'Basic',
-        attributes: {class:'fa fa-list'},
-        content: {
-          type: 'list'
-        }
-      });
-    }*/
 
   }
 

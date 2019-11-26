@@ -24,12 +24,7 @@ export default (editor, config = {}) => {
 
   const img_src_default = 'https://dummyimage.com/450x250/999/222';
 
-  const contexts = [
-    'primary', 'secondary',
-    'success', 'info',
-    'warning', 'danger',
-    'light', 'dark'
-  ];
+  const contexts = ['primary','secondary','success','info','warning','danger','light','dark'];
 
   const contexts_w_white = contexts.concat(['white']);
 
@@ -152,6 +147,86 @@ export default (editor, config = {}) => {
                 label: 'Border radius'
               },
               {
+                type: 'class_select',
+                options: [
+                  {value: '', name: 'Default'},
+                  {value: 'd-none', name: 'none'},
+                  {value: 'd-inline', name: 'inline'},
+                  {value: 'd-inline-block', name: 'inline-block'},
+                  {value: 'd-block', name: 'block'},
+                  {value: 'd-table', name: 'table'},
+                  {value: 'd-table-cell', name: 'table-cell'},
+                  {value: 'd-table-row', name: 'table-row'},
+                  {value: 'd-flex', name: 'flex'},
+                  {value: 'd-inline-flex', name: 'inline-flex'},
+                ],
+                label: 'Display XS'
+              },
+              {
+                type: 'class_select',
+                options: [
+                  {value: '', name: 'Default'},
+                  {value: 'd-sm-none', name: 'none'},
+                  {value: 'd-sm-inline', name: 'inline'},
+                  {value: 'd-sm-inline-block', name: 'inline-block'},
+                  {value: 'd-sm-block', name: 'block'},
+                  {value: 'd-sm-table', name: 'table'},
+                  {value: 'd-sm-table-cell', name: 'table-cell'},
+                  {value: 'd-sm-table-row', name: 'table-row'},
+                  {value: 'd-sm-flex', name: 'flex'},
+                  {value: 'd-sm-inline-flex', name: 'inline-flex'},
+                ],
+                label: 'Display SM',
+              },
+              {
+                type: 'class_select',
+                options: [
+                  {value: '', name: 'Default'},
+                  {value: 'd-md-none', name: 'none'},
+                  {value: 'd-md-inline', name: 'inline'},
+                  {value: 'd-md-inline-block', name: 'inline-block'},
+                  {value: 'd-md-block', name: 'block'},
+                  {value: 'd-md-table', name: 'table'},
+                  {value: 'd-md-table-cell', name: 'table-cell'},
+                  {value: 'd-md-table-row', name: 'table-row'},
+                  {value: 'd-md-flex', name: 'flex'},
+                  {value: 'd-md-inline-flex', name: 'inline-flex'},
+                ],
+                label: 'Display MD',
+              },
+              {
+                type: 'class_select',
+                options: [
+                  {value: '', name: 'Default'},
+                  {value: 'd-lg-none', name: 'none'},
+                  {value: 'd-lg-inline', name: 'inline'},
+                  {value: 'd-lg-inline-block', name: 'inline-block'},
+                  {value: 'd-lg-block', name: 'block'},
+                  {value: 'd-lg-table', name: 'table'},
+                  {value: 'd-lg-table-cell', name: 'table-cell'},
+                  {value: 'd-lg-table-row', name: 'table-row'},
+                  {value: 'd-lg-flex', name: 'flex'},
+                  {value: 'd-lg-inline-flex', name: 'inline-flex'},
+                ],
+                label: 'Display LG',
+              },
+              {
+                type: 'class_select',
+                options: [
+                  {value: '', name: 'Default'},
+                  {value: 'd-xl-none', name: 'none'},
+                  {value: 'd-xl-inline', name: 'inline'},
+                  {value: 'd-xl-inline-block', name: 'inline-block'},
+                  {value: 'd-xl-block', name: 'block'},
+                  {value: 'd-xl-table', name: 'table'},
+                  {value: 'd-xl-table-cell', name: 'table-cell'},
+                  {value: 'd-xl-table-row', name: 'table-row'},
+                  {value: 'd-xl-flex', name: 'flex'},
+                  {value: 'd-xl-inline-flex', name: 'inline-flex'},
+                ],
+                label: 'Display XL',
+              },
+              {
                 type: 'text',
                 label: 'ID',
                 name: 'id',
@@ -267,7 +342,6 @@ export default (editor, config = {}) => {
 
     // Basic
 
-    /*if (blocks.list) {
       domc.addType('list', {
         model: defaultModel.extend({
           defaults: Object.assign({}, defaultModel.prototype.defaults, {
@@ -296,10 +370,104 @@ export default (editor, config = {}) => {
         }),
         view: defaultView
       });
-    }*/
+
+      domc.addType('list-item', {
+        model: defaultModel.extend({
+          defaults: Object.assign({}, defaultModel.prototype.defaults, {
+            'custom-name': 'List-item',
+            tagName: 'li',
+            resizable: 0,
+            components: {
+              type: 'text',
+              components: {
+                type: 'textnode',
+                content: 'this is a list item',
+              }
+            },
+          })
+        }, {
+          isComponent: function(el) {
+            if(el && ['LI','li'].includes(el.tagName)) {
+              return {type: 'list-item'};
+            }
+          }
+        }),
+        view: defaultView
+      });
+    
+      domc.addType('media-list-item', {
+        model: defaultModel.extend({
+          defaults: Object.assign({}, defaultModel.prototype.defaults, {
+            'custom-name': 'Media-list-item',
+            tagName: 'li',
+            resizable: 0,
+            classes: ['media'],
+            components: [
+              '<img class="mr-3" src="">',
+              {
+                type: 'default',
+                classes: ['media-body'],
+                components: {
+                  typee:"textnode",
+                  content: "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.",
+                },
+              },
+            ]
+          })
+        }, {
+          isComponent: function(el) {
+            if(el && ['LI','li'].includes(el.tagName) && el.classList.contains('media')) {
+              return {type: 'media-list-item'};
+            }
+          }
+        }),
+        view: defaultView
+      });
 
     /*if (blocks.description_list) {
     }*/
+
+    domc.addType('card-list-item', {
+      model: defaultModel.extend({
+        defaults: Object.assign({}, defaultModel.prototype.defaults, {
+          'custom-name': 'Card-list-item',
+          tagName: 'div',
+          resizable: 0,
+          classes: ['card'],
+          components: [
+            {
+              type: 'header',
+              tagName: 'h5',
+              classes: ['card-header'],
+              content: 'featured',
+            },
+            {
+              type: 'list',
+              classes:['list-group', 'list-group-flush'],
+              components: [
+                {
+                  type: 'list-item',
+                  classes:["list-group-item"],
+                },{
+                  type: 'list-item',
+                  classes:["list-group-item"],
+                },{
+                  type:'list-item',
+                  classes:["list-group-item"],
+                },
+              ],
+            },
+          ]
+        })
+      }, {
+        isComponent: function(el) {
+          if(el && ['LI','li'].includes(el.tagName) && el.classList.contains('media')) {
+            return {type: 'media-list-item'};
+          }
+        }
+      }),
+      view: defaultView
+    });
 
   }
 

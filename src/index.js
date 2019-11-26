@@ -21,6 +21,8 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     text: true,
     link: true,
     image: true,
+    video: true,
+    'link-block': true,
     // LAYOUT
     container: true,
     row: true,
@@ -85,6 +87,7 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     image: 'Image',
     link: 'Link',
     list: 'Simple List',
+    video: 'Video',
     // FORMS
     form: 'Form',
     input: 'Input',
